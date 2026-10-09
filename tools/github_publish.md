@@ -56,7 +56,7 @@ git add .
 git status              # ★ 先看一眼，确认没有谱面文件混进来
 
 # 2. 提交
-git commit -m "v1.7.0：osu!taiko 谱面预览器"
+git commit -m 'v1.7.0：osu!taiko 谱面预览器'
 
 # 3. 连到GitHub 并推
 git remote add origin https://github.com/<你的用户名>/<仓库名>.git
@@ -154,7 +154,7 @@ cd /c/Users/Administrator/WorkBuddy/osu2/taiko-preview-web
 
 # 1. 改代码 / 提PR
 git add .
-git commit -m "v1.7.1：修xxx"
+git commit -m 'v1.7.1：修xxx'
 git push
 
 # 2. 升版本号（manifest.json 里的 version）

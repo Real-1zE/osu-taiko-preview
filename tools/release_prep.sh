@@ -46,6 +46,16 @@ bad()  { printf '  ❌ %s\n' "$1"; fail=1; }
 
 echo "发布前检查："
 
+# README 必须与唯一手写来源同步 —— GitHub 主页展示的是根目录那份
+if [ -f README-user.md ] && [ -f README.md ]; then
+  if cmp -s README-user.md README.md; then
+    ok "README.md 已与 README-user.md 同步"
+  else
+    bad "README.md 与 README-user.md 不一致 —— GitHub 主页会展示过期内容
+     修复：bash tools/sync_readme.sh"
+  fi
+fi
+
 VERSION="$(grep -o '"version"[[:space:]]*:[[:space:]]*"[^"]*"' manifest.json \
   | head -1 | sed 's/.*"\([^"]*\)"/\1/')"
 [ -n "$VERSION" ] && ok "版本号 $VERSION（manifest.json）" \
