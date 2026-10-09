@@ -1,6 +1,6 @@
 # osu!taiko 谱面预览器
 
-在 osu! 谱面页上直接预览这张谱的 **osu!taiko 画面**，不用切账号、不用改难度、不用下载谱面。
+在 osu! 谱面页上直接预览这张谱的 **osu!taiko 画面**。
 
 浏览器扩展，Chrome / Edge 都能用。
 
@@ -12,13 +12,9 @@
 
 ![在 osu! 官网谱面页上的预览窗口](docs/screenshots/beatmap-official-ppy-sh.png)
 
-**Bancho 系私服（osu.ppy.sb 等）**
+**osu.ppy.sb**
 
 ![在 Bancho 私服谱面页上的预览窗口](docs/screenshots/beatmap-private-server-bancho.png)
-
-> 两张是同一张谱（`Try Again` [1]），分别在官网与私服上。
-> 可以看到窗口里信息栏、段位行（`Reform 6`）、四条 skill 占比、
-> Star Rating 与最大 PP 都在，下面是可勾选的 mod 区。
 
 ---
 
@@ -38,15 +34,13 @@
 | | |
 |---|---|
 | `osu.ppy.sh`（官网） | ✅ |
-| `osu.ppy.sb` / `osu.ri.mk` 等 Bancho 系私服 | ✅ |
+| `osu.ppy.sb` / `osu.ri.mk` 私服 | ✅ |
 | osu!（std）谱 | ✅ 自动转成 taiko 视角显示，并标注「转谱」 |
-| osu!mania / osu!catch 谱 | ❌ 不显示窗口（转出来的画面和实际玩法差太远） |
+| osu!mania / osu!catch 谱 | ❌ 不显示窗口 |
 
 ---
 
 ## 安装
-
-### 方式一：下载 zip（推荐）
 
 1. 从 [Releases](../../releases) 下载最新的 `osu-taiko-preview-*.zip`
 2. 解压到一个**不会被清理的目录**（比如 `工具/osu-taiko-preview`）
@@ -58,14 +52,10 @@
 5. 点**「加载已解压的扩展程序」**，选中刚才解压出来的目录
 6. 打开 osu! 任意谱面页，窗口自动出现
 
-### 方式二：商店安装
-
-暂未上架 Chrome Web Store。
 
 ### 前置依赖
 
-**没有。** 不需要 Node.js、不需要 npm install、不需要 Python、
-不需要起本地服务、不需要联网（除了读取 osu! 自己的谱面文件）。
+没有。
 
 解压即用。
 
@@ -103,7 +93,8 @@
 ## 段位 / 键型是什么
 
 除了 osu! 官方的 Star Rating，这套工具还显示另一个独立的难度体系
-（来自 [dan_rank](https://github.com/) 项目的移植实现）：
+
+主要以Mew S的[Reform段位](https://osu.ppy.sh/beatmapsets/1922175#taiko/4191526)作为参考。
 
 - **段位** —— 1 ~ 10 段显示为 `Reform 1` ~ `Reform 10`，
   10 段以上是 `Alpha` / `Beta` / `Gamma` / `Delta`（带 `+` / `-` 分度），
@@ -111,10 +102,7 @@
 - **键型** —— 描述这张谱「难在哪」：大串 / 高速 / 协调 / 复合。
   段位 ≤6 时不标定键型（显示为空是正常的）
 
-它和 Star Rating **互不影响**，两套数值都会同时显示。
-
-> 这部分是独立实现，与 osu! 官方无关，数值口径可能与官方不同。
-> 它的作用是给另一个维度的参考，不是替代 Star Rating。
+由于这一部分蕴含本人强大的自由意志，因此提供了关闭功能。
 
 ---
 
@@ -143,14 +131,6 @@
 
 ---
 
-## 已知限制
-
-- 只支持 Chrome / Edge 等 Chromium 系浏览器（用了 Manifest V3）
-- Firefox 不支持（还没做）
-- 窗口里的画面是**静态预览**，不能播放、不能跟着音频滚动
-- 段位（Reform / Alpha 那套）是独立实现的社区算法，不是 osu! 官方评级
-
----
 
 ## 反馈
 
