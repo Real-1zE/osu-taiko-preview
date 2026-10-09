@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<style>
+  :root { color-scheme: dark; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    width: 300px; padding: 14px;
+    background: #14151d; color: #e8eaf2;
+    font: 13px/1.6 "Segoe UI", "Microsoft YaHei", system-ui, sans-serif;
+  }
+  h1 {
+    font-size: 15px; font-weight: 700; color: #ffd23f;
+    display: flex; align-items: center; gap: 8px; margin-bottom: 4px;
+  }
+  h1 img { width: 20px; height: 20px; border-radius: 4px; }
+  .sub { color: #8b91a5; font-size: 12px; margin-bottom: 12px; }
+  button {
+    width: 100%; padding: 9px 12px; margin-bottom: 8px;
+    background: #ffd23f; color: #20222c; border: none; border-radius: 8px;
+    font: inherit; font-weight: 700; cursor: pointer;
+  }
+  button:hover { background: #ffdd5c; }
+  button:disabled {
+    background: rgba(255,255,255,.06); color: #6f7686;
+    cursor: default; border: 1px solid rgba(255,255,255,.08);
+  }
+  button:disabled:hover { background: rgba(255,255,255,.06); }
+  button.ghost {
+    background: rgba(255,255,255,.08); color: #e8eaf2;
+    border: 1px solid rgba(255,255,255,.14); font-weight: 500;
+  }
+  button.ghost:hover { background: rgba(255,255,255,.14); }
+  .row {
+    display: flex; align-items: center; gap: 8px;
+    padding: 8px 10px; margin-bottom: 8px;
+    background: rgba(255,255,255,.05); border-radius: 8px;
+    border: 1px solid rgba(255,255,255,.08);
+  }
+  .dot { width: 8px; height: 8px; border-radius: 50%; background: #666; flex: none; }
+  .dot.on { background: #58d68d; box-shadow: 0 0 6px rgba(88,214,141,.7); }
+  .row .lab { color: #b8bdcd; }
+  .row .val { margin-left: auto; color: #9aa0b4; font-size: 12px;
+              font-variant-numeric: tabular-nums; }
+</style>
+</head>
+<body>
+  <h1><img src="icons/icon48.png" alt=""> osu!taiko 预览</h1>
+
+  <div class="row">
+    <span class="dot" id="dot"></span>
+    <span class="lab">当前页面</span>
+    <span class="val" id="page">检测中…</span>
+  </div>
+  <div class="row" id="mapRow" style="display:none">
+    <span class="dot on" id="dot2"></span>
+    <span class="lab">已加载</span>
+    <span class="val" id="map"></span>
+  </div>
+  <div class="row" id="srRow" style="display:none">
+    <span class="dot on"></span>
+    <span class="lab"><span id="srMod">NoMod</span></span>
+    <span class="val" id="srVal">—</span>
+  </div>
+
+  <button id="toggle">显示 / 隐藏窗口</button>
+  <button class="ghost" id="refresh">重新读取谱面</button>
+
+<script src="popup.js"></script>
+</body>
+</html>

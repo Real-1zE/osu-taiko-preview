@@ -1,0 +1,44 @@
+# ---- 依赖与构建产物 ----
+# 本项目**零依赖**：没有 package.json，不需要 npm install。
+# 下面两条是防御性的 —— 万一将来有人加了工具链，别把产物提交上来。
+node_modules/
+package-lock.json
+yarn.lock
+dist/
+
+# ---- 发布目录（由 tools/release_prep.sh 生成）----
+release/
+
+# ---- 谱面样本与对拍语料（**不要提交**）----
+# 这些是从 osu! 下载的**真实谱面文件**与从官方 C# 导出的基准数据，
+# 属于第三方作品 / 大体积对拍语料，公开仓库里不该有。
+# 测试可按 tools/github_publish.md 的说明自行下载/生成样本。
+test/test_zips/
+test/badsweets/
+test/std_official/
+test/python_baseline.json
+test/python_std_baseline.json
+test/dan_bridge_baseline.json
+dev/
+*.osz
+*.osu
+
+# ---- 皮肤 ----
+taiko skin/
+testmap/
+osu_tree.json
+
+# ---- 本地临时 ----
+_cache_*.tsv
+_tmp_*
+~$*          # Excel/WPS 临时文件
+*.bak_*
+__pycache__/
+*.pyc
+
+# ---- 编辑器 ----
+.vscode/
+.idea/
+*.swp
+.DS_Store
+Thumbs.db
