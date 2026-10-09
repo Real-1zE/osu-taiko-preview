@@ -142,9 +142,41 @@ done
 
 # 把版本号写进 CHANGELOG 的「未发布」标题，避免忘了同步
 echo
-echo "下一步："
-echo "  1. 打开 $OUT/ 检查一遍"
-echo "  2. 打 zip 给别人："
-echo "       cd '$OUT' && zip -r osu-taiko-preview-$VERSION.zip '$PLUGIN_NAME' README.md LICENSE"
-echo "     （或用 bash tools/package_extension.sh 只打插件本体）"
-echo "  3. 建仓库并上传（见 README-user.md 的「发布到 GitHub」一节）"
+echo "下一步：把下面生成的 zip 上传到 GitHub Release（用户从那里下载）"
+
+# ---------------------------------------------------------- 打 zip
+# ★ 打包时的目录层级很关键：
+#   Chrome 的「加载已解压的扩展程序」要求**选中的目录里直接有 manifest.json**。
+#   如果 zip 里多套一层（比如 release/osu-taiko-preview/manifest.json），
+#   用户解压后还得再进一层才能选中，很容易卡住。
+#   所以 zip 的根应该是 release/ 的**内容**（osu-taiko-preview/ 与 README 并列）。
+ZIP="$HERE/osu-taiko-preview-$VERSION.zip"
+rm -f "$ZIP"
+PY="${PYTHON:-C:/Users/Administrator/.workbuddy/binaries/python/versions/3.13.12/python.exe}"
+command -v python >/dev/null 2>&1 && PY=python
+"$PY" - "$OUT" "$ZIP" <<'PYEOF'
+import os, sys, zipfile
+src, out = sys.argv[1], sys.argv[2]
+n = 0
+with zipfile.ZipFile(out, 'w', zipfile.ZIP_DEFLATED, compresslevel=9) as z:
+    for root, dirs, files in os.walk(src):
+        dirs.sort(); files.sort()
+        for f in files:
+            full = os.path.join(root, f)
+            # ★ arc 用**相对 src 的路径**，而不是包含 src 本身
+            arc = os.path.relpath(full, src).replace(os.sep, '/')
+            z.write(full, arc); n += 1
+print(' 打包 %d 个文件，%.0f KB' % (n, os.path.getsize(out) / 1024))
+# 自检：manifest 必须在恰好一层之下
+with zipfile.ZipFile(out) as z:
+    ms = [x for x in z.namelist() if x.endswith('manifest.json')]
+    if len(ms) != 1:
+        raise SystemExit('❌ manifest.json 数量异常：%r' % ms)
+    depth = ms[0].count('/')
+    if depth != 1:
+        raise SystemExit(
+            '❌ manifest.json 深度是 %d 层（应为 1 层）—— 用户要多进一层才能加载：%s'
+            % (depth, ms[0]))
+    print('    manifest 在 %s（1 层，Chrome 能直接选中）✅' % ms[0])
+PYEOF
+echo "     -> $ZIP"

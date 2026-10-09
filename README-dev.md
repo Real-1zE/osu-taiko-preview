@@ -31,23 +31,30 @@
 
 ## 安装
 
-### 给别人用（推荐：发 zip）
+### 给别人用（发 zip）
 
 1. 生成 zip（**不要**直接压缩整个目录——里面有 6.8MB 开发文件，
    包括 100+ 张真实谱面样本，对方用不上）：
    ```bash
-   bash tools/package_extension.sh
+   bash tools/release_prep.sh
    ```
-   产物在 `dist/taiko-preview-web-<版本>.zip`，**约 180KB / 18 个文件**。
+   产物在项目根目录的 `osu-taiko-preview-<版本>.zip`，
+   **约 1.7MB / 24 个文件**（插件本体 + README + LICENSE + 截图）。
 
-2. 把这个 zip 发给对方（微信/网盘/github release 都行）。
+   > 脚本会先校验：版本号、图标、无外部资源引用、
+   > `web_accessible_resources` 覆盖 `lib/*.js`、README 是否已同步，
+   > 以及 zip 里 `manifest.json` 是否恰好在 1 层之下
+   > （Chrome 要求选中的目录里直接有 manifest，多一层就装不上）。
+
+2. 把这个 zip 发给对方（微信/网盘/GitHub Release 都行）。
 
 3. 对方这样装：
-   1. 解压到一个**不会被清理**的目录（比如 `工具/taiko-preview-web`）
+   1. 解压到一个**不会被清理**的目录（比如 `工具/osu-taiko-preview`）
       ——别放在下载目录，Chrome 可能会跟着清理
    2. 地址栏打开 `chrome://extensions`（Edge 是 `edge://extensions`）
    3. 右上角开启**「开发者模式」**
-   4. 点**「加载已解压的扩展程序」**，选中刚才那个目录
+   4. 点**「加载已解压的扩展程序」**，选中解压出来的
+      **`osu-taiko-preview`** 子目录（就是里面直接有 `manifest.json` 的那层）
    5. 打开 osu! 任意谱面页，窗口自动出现
 
 4. 以后更新：把新 zip **解压覆盖**同一个目录，回到扩展页点刷新图标。

@@ -6,6 +6,12 @@ package-lock.json
 yarn.lock
 dist/
 
+# ★ 发布 zip（由 tools/release_prep.sh 生成）
+#   产物在**项目根目录**，不在 dist/ 里，所以 `dist/` 那条规则挡不住它。
+#   实测踩过：`git add -A` 把 1.7MB 的包连带进去了 ——
+#   zip 应该只出现在 GitHub Release 上，不该进 git 历史。
+osu-taiko-preview-*.zip
+
 # ---- 发布目录（由 tools/release_prep.sh 生成）----
 release/
 
