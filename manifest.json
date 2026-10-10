@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "osu!taiko 谱面预览器",
-  "version": "1.7.0",
+  "version": "1.8.0",
   "description": "在 osu! 谱面页面上显示 osu!taiko 预览窗口：读取官方 .osu 渲染静态预览图，含 Star Rating/skill 占比/最大 PP（可勾选 mod，OD 按官方口径随 HT/DT 折算），窗口可拖动/缩放，画面内拖动查看全谱。osu!（std）谱按官方 TaikoBeatmapConverter 转谱后显示；mania/catch 不显示窗口。",
   "icons": {
     "16": "icons/icon16.png",
